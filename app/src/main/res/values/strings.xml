@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Doctors Appointment App</string>
+    <string-array name="doctor_specialties">
+        <item>Select Specialty</item>
+        <item>Cardiologist</item>
+        <item>Dermatologist</item>
+        <item>Neurologist</item>
+        <item>Pediatrician</item>
+        <item>Surgeon</item>
+    </string-array>
 </resources>

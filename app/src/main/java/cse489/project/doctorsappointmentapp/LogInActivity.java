@@ -33,7 +33,7 @@ import java.util.Map;
 public class LogInActivity extends AppCompatActivity {
   EditText email;
   EditText password;
-  TextView signup;
+  TextView signup, doctorbtn;
   Button loginBtn;
   boolean passwordVisible;
   ProgressBar progressbar;
@@ -58,6 +58,7 @@ public class LogInActivity extends AppCompatActivity {
     loginBtn = findViewById(R.id.loginBtn);
     signup = findViewById(R.id.signupNow);
     progressbar = findViewById(R.id.progressBar);
+    doctorbtn = findViewById(R.id.doctorbtn);
     password.setOnTouchListener(new View.OnTouchListener() {
       @Override
       public boolean onTouch(View v, MotionEvent event) {
@@ -133,6 +134,12 @@ public class LogInActivity extends AppCompatActivity {
         Intent i = new Intent(LogInActivity.this, SignUpActivity.class);
         startActivity(i);
 
+      }
+    });
+    doctorbtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startActivity(new Intent(LogInActivity.this, DoctorSignUp.class));
       }
     });
 

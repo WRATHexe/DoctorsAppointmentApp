@@ -156,6 +156,7 @@ public class SignUpActivity extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                               @Override
                               public void onSuccess(Void aVoid) {
+                                System.out.println("here");
                                 Toast.makeText(SignUpActivity.this, "Signup successful", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(SignUpActivity.this, Homepage.class);
                                 startActivity(i);
@@ -166,6 +167,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         Toast.makeText(SignUpActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
+                        System.out.println("Authentication failed.");
                       }
 
                     }
