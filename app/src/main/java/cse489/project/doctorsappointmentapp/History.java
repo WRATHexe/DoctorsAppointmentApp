@@ -51,7 +51,7 @@ public class History extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         FirebaseAuth.getInstance().signOut();
-        Intent i = new Intent(History.this, AdminLogInActivity.class);
+        Intent i = new Intent(History.this, LogInActivity.class);
         startActivity(i);
         finish();
       }

@@ -38,7 +38,7 @@ public class LogInActivity extends AppCompatActivity {
     super.onStart();
     FirebaseUser currentUser = mAuth.getCurrentUser();
     if(currentUser != null){
-      Intent i = new Intent(AdminLogInActivity.this, Homepage.class);
+      Intent i = new Intent(LogInActivity.this, Homepage.class);
       startActivity(i);
     }
   }
@@ -90,7 +90,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
         if (!validationMessage.isEmpty()) {
-          Toast.makeText(AdminLogInActivity.this, validationMessage, Toast.LENGTH_SHORT).show();
+          Toast.makeText(LogInActivity.this, validationMessage, Toast.LENGTH_SHORT).show();
         } else {
           progressbar.setVisibility(View.VISIBLE);
           loginBtn.setBackgroundColor(Color.parseColor("#BDBDBD"));
@@ -103,12 +103,12 @@ public class LogInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                       if (task.isSuccessful()) {
-                        Toast.makeText(AdminLogInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(AdminLogInActivity.this, Homepage.class);
+                        Toast.makeText(LogInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(LogInActivity.this, Homepage.class);
                         startActivity(i);
                         finish();
                       } else {
-                        Toast.makeText(AdminLogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                       }
                       progressbar.setVisibility(View.INVISIBLE);
                       loginBtn.setBackgroundColor(Color.parseColor("#FF000000"));
@@ -125,7 +125,7 @@ public class LogInActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
 
-        Intent i = new Intent(AdminLogInActivity.this, SignUpActivity.class);
+        Intent i = new Intent(LogInActivity.this, SignUpActivity.class);
         startActivity(i);
 
       }
