@@ -14,9 +14,18 @@ import java.util.List;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
     private List<Doctor> doctorList;
+    private OnDoctorClickListener listener;
 
-    public DoctorAdapter(List<Doctor> doctorList) {
+    // Define a custom interface for click events
+    public interface OnDoctorClickListener {
+        void onDoctorClick(int position);
+        void onViewDetailsClick(int position);
+    }
+
+    // Constructor
+    public DoctorAdapter(List<Doctor> doctorList, OnDoctorClickListener listener) {
         this.doctorList = doctorList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -29,9 +38,24 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     @Override
     public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
         Doctor doctor = doctorList.get(position);
+
+        // Bind data to views
         holder.doctorName.setText(doctor.getName());
         holder.doctorSpecialty.setText(doctor.getSpecialty());
-        holder.doctorImage.setImageResource(doctor.getImageResourceId()); // Replace with Glide/Picasso for URLs.
+        holder.doctorImage.setImageResource(doctor.getImageResourceId()); // Replace with Glide/Picasso for URL images
+
+        // Set click listeners
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onDoctorClick(position);
+            }
+        });
+
+        holder.viewDetails.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onViewDetailsClick(position);
+            }
+        });
     }
 
     @Override
