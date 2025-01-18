@@ -140,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:text="Dr. Roman Reigns"
+                    android:text="Dr. Fardin Rahman"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
@@ -151,18 +151,6 @@
                         android:textSize="14sp"
                         android:textColor="@color/black"/>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/details"
-                android:layout_width="109dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:backgroundTint="#ACEDF3"
-                android:text="Details"
-                android:textColor="#00BCD4"
-                android:textSize="12sp"
-                app:cornerRadius="15dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

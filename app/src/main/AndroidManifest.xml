@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DoctorsAppointmentApp"
         tools:targetApi="31">
         <activity
+            android:name=".AdminLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistoryDetails"
             android:exported="false" />
         <activity
@@ -45,7 +48,7 @@
             android:name=".PasswordChange"
             android:exported="false" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".AdminLogInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

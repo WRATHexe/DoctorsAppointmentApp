@@ -3,9 +3,7 @@ package cse489.project.doctorsappointmentapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +13,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class Homepage extends AppCompatActivity {
@@ -65,7 +59,7 @@ public class Homepage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         user=auth.getCurrentUser();
         if(user==null){
-            Intent i = new Intent(Homepage.this, LogInActivity.class);
+            Intent i = new Intent(Homepage.this, AdminLogInActivity.class);
             startActivity(i);
             finish();
         }
@@ -91,7 +85,7 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent i = new Intent(Homepage.this, LogInActivity.class);
+                Intent i = new Intent(Homepage.this, AdminLogInActivity.class);
                 startActivity(i);
                 finish();
             }
