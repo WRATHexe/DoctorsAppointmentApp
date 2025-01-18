@@ -1,18 +1,11 @@
 package cse489.project.doctorsappointmentapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -20,6 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,8 +31,8 @@ import java.util.Date;
 
 public class AppontmentForm extends AppCompatActivity {
 
-    EditText name,phone,age,address;
-    ImageView home,appointmentBtn,history;
+    EditText name, phone, age, address;
+    ImageView home, appointmentBtn, history;
     TextView date;
     RadioGroup gender;
     RadioButton selectedRadioButton;
@@ -55,12 +51,12 @@ public class AppontmentForm extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         age = findViewById(R.id.age);
         time = findViewById(R.id.time);
-        home=findViewById(R.id.home);
-        appointmentBtn=findViewById(R.id.appointmentBtn);
-        history=findViewById(R.id.history);
-        gender=findViewById(R.id.gender);
+        home = findViewById(R.id.home);
+        appointmentBtn = findViewById(R.id.appointmentBtn);
+        history = findViewById(R.id.history);
+        gender = findViewById(R.id.gender);
         db = FirebaseFirestore.getInstance();
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         address = findViewById(R.id.address);
         date = findViewById(R.id.date);
         next = findViewById(R.id.next);
@@ -70,7 +66,7 @@ public class AppontmentForm extends AppCompatActivity {
                 showDatePickerDialog();
             }
         });
-        String[] timeSlots = {"Select Time (PM)","5:00-5:20","5:25-5:55", "6:00-6:20", "6:25-6:55", "7:00-7:20", "7:25-7:55", "8:00-8:20", "8:25-8:55", "9:00-9:20"};
+        String[] timeSlots = {"Select Time (PM)", "5:00-5:20", "5:25-5:55", "6:00-6:20", "6:25-6:55", "7:00-7:20", "7:25-7:55", "8:00-8:20", "8:25-8:55", "9:00-9:20"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, timeSlots);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         time.setAdapter(adapter);
@@ -78,7 +74,7 @@ public class AppontmentForm extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validateFields()) {
+                if (validateFields()) {
                     String Name = name.getText().toString();
                     String Phone = phone.getText().toString();
                     String Age = age.getText().toString();
@@ -121,6 +117,7 @@ public class AppontmentForm extends AppCompatActivity {
             }
         });
     }
+
     private void showDatePickerDialog() {
         Date currentDate = new Date();
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -139,16 +136,10 @@ public class AppontmentForm extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                (view, selectedYear, selectedMonth, selectedDay) -> {
-                    String selectedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear);
-                    date.setText(selectedDate);
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-        );
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) -> {
+            String selectedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear);
+            date.setText(selectedDate);
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         if (isTimeInRange) {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -173,7 +164,6 @@ public class AppontmentForm extends AppCompatActivity {
             return false;
         }
     }
-
 
 
     private boolean validateFields() {
@@ -202,67 +192,59 @@ public class AppontmentForm extends AppCompatActivity {
             address.setError("Address cannot be empty");
             return false;
         }
-        if(date.getText().toString().isEmpty()){
+        if (date.getText().toString().isEmpty()) {
             date.setError("date cannot be empty");
             return false;
         }
 
         return true;
     }
+
     private void checkAppointmentExistence(String time, String date, String name, String phone, String age, String address, String gender) {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
-            db.collection("appointments")
-                    .whereEqualTo("time", time)
-                    .whereEqualTo("date", date)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                if (!task.getResult().isEmpty()) {
-                                    Toast.makeText(AppontmentForm.this, "Please choose another time slot.", Toast.LENGTH_SHORT).show();
-                                    System.out.println("Ok");
-                                }
-                                else {
-                                    db.collection("appointments")
-                                            .whereEqualTo("p_id", userId)
-                                            .whereEqualTo("date", date)
-                                            .get()
-                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        if (!task.getResult().isEmpty()) {
-                                                            Toast.makeText(AppontmentForm.this, "You already have an appointment on this day.", Toast.LENGTH_SHORT).show();
-                                                        } else {
+            db.collection("appointments").whereEqualTo("time", time).whereEqualTo("date", date).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            Toast.makeText(AppontmentForm.this, "Please choose another time slot.", Toast.LENGTH_SHORT).show();
+                            System.out.println("Ok");
+                        } else {
+                            db.collection("appointments").whereEqualTo("p_id", userId).whereEqualTo("date", date).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        if (!task.getResult().isEmpty()) {
+                                            Toast.makeText(AppontmentForm.this, "You already have an appointment on this day.", Toast.LENGTH_SHORT).show();
+                                        } else {
 
-                                                            Intent previewIntent = new Intent(AppontmentForm.this, PreviewForm.class);
-                                                            Bundle b = new Bundle();
-                                                            b.putString("name", name);
-                                                            b.putString("phone", phone);
-                                                            b.putString("age", age);
-                                                            b.putString("time", time);
-                                                            b.putString("address", address);
-                                                            b.putString("gender", gender);
-                                                            b.putString("date", date);
-                                                            previewIntent.putExtras(b);
-                                                            startActivity(previewIntent);
-                                                        }
-                                                    } else {
-                                                        System.out.println("Error");
-                                                    }
-                                                }
-                                            });
+                                            Intent previewIntent = new Intent(AppontmentForm.this, PreviewForm.class);
+                                            Bundle b = new Bundle();
+                                            b.putString("name", name);
+                                            b.putString("phone", phone);
+                                            b.putString("age", age);
+                                            b.putString("time", time);
+                                            b.putString("address", address);
+                                            b.putString("gender", gender);
+                                            b.putString("date", date);
+                                            previewIntent.putExtras(b);
+                                            startActivity(previewIntent);
+                                        }
+                                    } else {
+                                        System.out.println("Error");
+                                    }
                                 }
-                            } else {
-                                System.out.println("Error");
-                            }
+                            });
                         }
-                    });
+                    } else {
+                        System.out.println("Error");
+                    }
+                }
+            });
         } else {
 
             System.out.println("Error");

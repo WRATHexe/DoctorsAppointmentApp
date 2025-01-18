@@ -42,48 +42,17 @@
                 android:drawablePadding="8dp"
                 android:textColorHint="@color/darkgrey"
                 android:textColor="@color/black"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/email"
-                android:background="@drawable/custom_edit_text"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Email"
-                android:drawableLeft="@drawable/baseline_email_24"
-                android:drawablePadding="8dp"
-                android:textColorHint="@color/darkgrey"
-                android:textColor="@color/black"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/password"
-                android:background="@drawable/custom_edit_text"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Password"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:drawableRight="@drawable/baseline_visibility_off_24"
-                android:drawablePadding="8dp"
-                android:inputType="textPassword"
-                android:longClickable="false"
-                android:textColorHint="@color/darkgrey"
-                android:textColor="@color/black"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/confirm_password"
-                android:background="@drawable/custom_edit_text"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Confirm Password"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:drawableRight="@drawable/baseline_visibility_off_24"
-                android:drawablePadding="8dp"
-                android:inputType="textPassword"
-                android:longClickable="false"
-                android:textColorHint="@color/darkgrey"
-                android:textColor="@color/black"/>
+
+        <Spinner
+            android:id="@+id/doctorSpecialty"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/custom_edit_text"
+            android:padding="8dp"
+            android:spinnerMode="dropdown"/>
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

@@ -108,63 +108,11 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:padding="10dp"/>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card2"
+        <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="15dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/custom_edit_text">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:background="@color/white">
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:src="@drawable/user_icon" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Dr. Roman Reigns"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pulmonologist Special"
-                        android:textSize="14sp"
-                        android:textColor="@color/black"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/details"
-                android:layout_width="109dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:backgroundTint="#ACEDF3"
-                android:text="Details"
-                android:textColor="#00BCD4"
-                android:textSize="12sp"
-                app:cornerRadius="15dp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_doctor_card" />
 
     </LinearLayout>
     </ScrollView>

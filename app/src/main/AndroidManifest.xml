@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DoctorsAppointmentApp"
         tools:targetApi="31">
         <activity
+            android:name=".DoctorSignUp"
+            android:exported="false" />
+        <activity
             android:name=".HistoryDetails"
             android:exported="false" />
         <activity

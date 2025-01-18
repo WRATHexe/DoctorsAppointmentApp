@@ -2,6 +2,8 @@ package cse489.project.doctorsappointmentapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlarmManager;
 import android.app.Dialog;
@@ -34,8 +36,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class Homepage extends AppCompatActivity {
@@ -61,7 +65,7 @@ public class Homepage extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         empty=findViewById(R.id.empty);
         appointmentsLayout = findViewById(R.id.appointments_layout);
-        details=findViewById(R.id.details);
+        //details=findViewById(R.id.details);
         db = FirebaseFirestore.getInstance();
         user=auth.getCurrentUser();
         if(user==null){
@@ -86,6 +90,44 @@ public class Homepage extends AppCompatActivity {
                 }
             });
         }
+        List<Doctor> doctorList = new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        DoctorAdapter adapter = new DoctorAdapter(doctorList);
+
+// Set up RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+// Reference Firestore
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+// Query Firestore for doctor data
+        db.collection("doctors")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Clear the list to prevent duplicate entries
+                        doctorList.clear();
+
+                        // Iterate through the query results
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String name = document.getString("doctorName");
+                            String specialty = document.getString("specialty");
+                            int imageResId = R.drawable.doc; // Replace with dynamic image logic if needed
+
+                            // Add each doctor to the list
+                            doctorList.add(new Doctor(name, specialty, imageResId));
+                        }
+
+                        // Notify adapter about the updated data
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        // Handle the error
+                        Toast.makeText(this, "Failed to load data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
         displayUserAppointments();
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,15 +138,15 @@ public class Homepage extends AppCompatActivity {
                 finish();
             }
         });
-        details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(Homepage.this, details.class);
-                startActivity(i);
-
-            }
-        });
+//        details.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(Homepage.this, details.class);
+//                startActivity(i);
+//
+//            }
+//        });
         userAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
