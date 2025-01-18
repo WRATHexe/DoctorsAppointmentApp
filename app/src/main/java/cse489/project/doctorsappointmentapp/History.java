@@ -12,7 +12,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +51,7 @@ public class History extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         FirebaseAuth.getInstance().signOut();
-        Intent i = new Intent(History.this, LogInActivity.class);
+        Intent i = new Intent(History.this, AdminLogInActivity.class);
         startActivity(i);
         finish();
       }

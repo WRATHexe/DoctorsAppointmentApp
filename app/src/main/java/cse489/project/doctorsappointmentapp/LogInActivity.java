@@ -23,12 +23,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LogInActivity extends AppCompatActivity {
   EditText email;
@@ -44,7 +38,7 @@ public class LogInActivity extends AppCompatActivity {
     super.onStart();
     FirebaseUser currentUser = mAuth.getCurrentUser();
     if(currentUser != null){
-      Intent i = new Intent(LogInActivity.this, Homepage.class);
+      Intent i = new Intent(AdminLogInActivity.this, Homepage.class);
       startActivity(i);
     }
   }
@@ -96,7 +90,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
         if (!validationMessage.isEmpty()) {
-          Toast.makeText(LogInActivity.this, validationMessage, Toast.LENGTH_SHORT).show();
+          Toast.makeText(AdminLogInActivity.this, validationMessage, Toast.LENGTH_SHORT).show();
         } else {
           progressbar.setVisibility(View.VISIBLE);
           loginBtn.setBackgroundColor(Color.parseColor("#BDBDBD"));
@@ -109,12 +103,12 @@ public class LogInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                       if (task.isSuccessful()) {
-                        Toast.makeText(LogInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(LogInActivity.this, Homepage.class);
+                        Toast.makeText(AdminLogInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(AdminLogInActivity.this, Homepage.class);
                         startActivity(i);
                         finish();
                       } else {
-                        Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminLogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                       }
                       progressbar.setVisibility(View.INVISIBLE);
                       loginBtn.setBackgroundColor(Color.parseColor("#FF000000"));
@@ -131,7 +125,7 @@ public class LogInActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
 
-        Intent i = new Intent(LogInActivity.this, SignUpActivity.class);
+        Intent i = new Intent(AdminLogInActivity.this, SignUpActivity.class);
         startActivity(i);
 
       }
