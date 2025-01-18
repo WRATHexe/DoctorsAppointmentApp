@@ -31,8 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LogInActivity extends AppCompatActivity {
-  EditText email;
-  EditText password;
+  EditText email, password;
   TextView signup;
   Button loginBtn;
   boolean passwordVisible;
@@ -73,7 +72,7 @@ public class LogInActivity extends AppCompatActivity {
             }
             else{
 
-              password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_lock_24,0,R.drawable.baseline_remove_red_eye_24,0);
+              password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_lock_24,0, R.drawable.baseline_remove_red_eye_24,0);
               password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
               passwordVisible= true;
 
