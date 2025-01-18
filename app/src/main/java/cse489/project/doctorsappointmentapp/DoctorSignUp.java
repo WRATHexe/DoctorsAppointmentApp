@@ -1,5 +1,6 @@
 package cse489.project.doctorsappointmentapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -96,6 +97,7 @@ public class DoctorSignUp extends AppCompatActivity {
                     // Data added successfully
                     System.out.println("Doctor added with ID: " + documentReference.getId());
                     Toast.makeText(this, "You have been successfully listed", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DoctorSignUp.this, LogInActivity.class));
                 })
                 .addOnFailureListener(e -> {
                     // Error occurred while adding data
