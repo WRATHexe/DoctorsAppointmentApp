@@ -28,7 +28,7 @@ public class DoctorSignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_doctor_sign_up);
 
         // Initialize Spinner and Button
         name = findViewById(R.id.name);
