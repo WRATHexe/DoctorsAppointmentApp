@@ -51,9 +51,9 @@ public class AppontmentForm extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         age = findViewById(R.id.age);
         time = findViewById(R.id.time);
-        home = findViewById(R.id.home);
-        appointmentBtn = findViewById(R.id.appointmentBtn);
-        history = findViewById(R.id.history);
+        //home = findViewById(R.id.home);
+        //appointmentBtn = findViewById(R.id.appointmentBtn);
+        //history = findViewById(R.id.history);
         gender = findViewById(R.id.gender);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -92,34 +92,34 @@ public class AppontmentForm extends AppCompatActivity {
                 }
             }
         });
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(AppontmentForm.this, Homepage.class);
-                startActivity(i);
-                finish();
-
-            }
-        });
-        appointmentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(AppontmentForm.this, AppontmentForm.class);
-                startActivity(i);
-
-            }
-        });
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(AppontmentForm.this, History.class);
-                startActivity(i);
-
-            }
-        });
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(AppontmentForm.this, Homepage.class);
+//                startActivity(i);
+//                finish();
+//
+//            }
+//        });
+//        appointmentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(AppontmentForm.this, AppontmentForm.class);
+//                startActivity(i);
+//
+//            }
+//        });
+//        history.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(AppontmentForm.this, History.class);
+//                startActivity(i);
+//
+//            }
+//        });
     }
 
     private void showDatePickerDialog() {
