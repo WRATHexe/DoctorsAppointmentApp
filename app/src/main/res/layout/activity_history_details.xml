@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#8C57E8"
+        android:background="@color/theme"
         android:layout_marginBottom="15dp">
 
         <TextView
@@ -21,7 +21,7 @@
             android:text="History"
             android:gravity="center"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:padding="18dp"/>
     </LinearLayout>
