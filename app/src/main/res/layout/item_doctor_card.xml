@@ -40,9 +40,9 @@
         </LinearLayout>
         <Button
             android:id="@+id/viewDetails"
-            android:layout_width="100dp"
+            android:layout_width="135dp"
             android:layout_height="wrap_content"
-            android:text="Details"
+            android:text="Book Appointment"
             android:backgroundTint="#673AB7"
             android:textColor="#FFFFFF" />
     </LinearLayout>

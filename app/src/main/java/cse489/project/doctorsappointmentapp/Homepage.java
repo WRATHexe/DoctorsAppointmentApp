@@ -76,6 +76,7 @@ public class Homepage extends AppCompatActivity {
         history = findViewById(R.id.history);
         empty = findViewById(R.id.empty);
         appointmentsLayout = findViewById(R.id.appointments_layout);
+
     }
 
     private void checkUserAuthentication() {
@@ -106,7 +107,13 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onViewDetailsClick(int position) {
                 Doctor clickedDoctor = doctorList.get(position);
-                Toast.makeText(Homepage.this, "View Details for: " + clickedDoctor.getDocumentId(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Homepage.this, "View Details for: " + clickedDoctor.getDocumentId(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Homepage.this, AppontmentForm.class);
+                i.putExtra("DOCTOR-ID", clickedDoctor.getDocumentId() );
+                i.putExtra("DOCTOR-NAME", clickedDoctor.getName());
+                i.putExtra("DOCTOR-SPECIALTY", clickedDoctor.getSpecialty());
+                startActivity(i);
+                finish();
             }
         });
 
@@ -190,31 +197,76 @@ public class Homepage extends AppCompatActivity {
                             String appointmentDate = document.getString("date");
                             String appointmentTime = document.getString("time");
                             String name = document.getString("name");
+                            String phone = document.getString("phone");
+                            String age = document.getString("age");
+                            String address = document.getString("address");
+                            String gender = document.getString("gender");
+                            String email = document.getString("email");
+                            String d_id = document.getString("d_id"); // Doctor ID
+                            String documentId = document.getId();
+                            String passed = document.getString("passed");
 
+                            // Inflate the appointment card layout
                             View appointmentCard = getLayoutInflater().inflate(R.layout.layout_appointmentlist, null);
                             TextView dateTextView = appointmentCard.findViewById(R.id.datelist);
                             TextView timeTextView = appointmentCard.findViewById(R.id.timelist);
                             TextView nameTextView = appointmentCard.findViewById(R.id.name);
+                            TextView doctorInfoTV = appointmentCard.findViewById(R.id.doctorInfoTV);
 
+                            // Populate appointment details
                             dateTextView.setText(appointmentDate);
                             timeTextView.setText(appointmentTime + " PM");
                             nameTextView.setText(name);
+
+                            // Fetch and display doctor information based on d_id
+                            if (d_id != null && !d_id.isEmpty()) {
+                                db.collection("doctors").document(d_id).get()
+                                        .addOnSuccessListener(doctorSnapshot -> {
+                                            if (doctorSnapshot.exists()) {
+                                                String doc_name = doctorSnapshot.getString("doctorName");
+                                                String doc_sp = doctorSnapshot.getString("specialty");
+
+                                                // Update doctor information TextView
+                                                doctorInfoTV.setText("You have an appointment with Dr. " + doc_name +
+                                                        ", " + doc_sp + ".");
+                                            } else {
+                                                doctorInfoTV.setText("Doctor information could not be retrieved.");
+                                            }
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            doctorInfoTV.setText("Error retrieving doctor information.");
+                                            e.printStackTrace();
+                                        });
+                            } else {
+                                doctorInfoTV.setText("Doctor ID is missing in the appointment.");
+                            }
+
+                            // Add the card to the appointments layout
                             appointmentsLayout.addView(appointmentCard);
 
+                            // Set long click listener for canceling appointment
                             appointmentCard.setOnLongClickListener(v -> {
                                 showCancelDialog(this, appointmentDate, appointmentTime);
                                 return true;
                             });
 
+                            // Set click listener to view appointment details
                             appointmentCard.setOnClickListener(view -> {
                                 Intent detailsIntent = new Intent(Homepage.this, AppointmentDetails.class);
-                                detailsIntent.putExtra("appointmentDate", appointmentDate);
-                                detailsIntent.putExtra("appointmentTime", appointmentTime);
+                                detailsIntent.putExtra("date", appointmentDate);
+                                detailsIntent.putExtra("time", appointmentTime);
                                 detailsIntent.putExtra("name", name);
+                                detailsIntent.putExtra("phone", phone);
+                                detailsIntent.putExtra("age", age);
+                                detailsIntent.putExtra("address", address);
+                                detailsIntent.putExtra("gender", gender);
+                                detailsIntent.putExtra("email", email);
+                                detailsIntent.putExtra("d_id", d_id);
                                 startActivity(detailsIntent);
                             });
                         }
                     } else {
+                        // No appointments found
                         empty.setText("No Upcoming Appointments");
                     }
                 });
