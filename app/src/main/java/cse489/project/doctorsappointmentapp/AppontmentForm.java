@@ -31,16 +31,16 @@ import java.util.Date;
 
 public class AppontmentForm extends AppCompatActivity {
 
-    EditText name, phone, age, address;
-    ImageView home, appointmentBtn, history;
-    TextView date;
-    RadioGroup gender;
-    RadioButton selectedRadioButton;
-    Button next;
-    Spinner time;
-    FirebaseFirestore db;
-    FirebaseAuth mAuth;
-    int selectedRadioButtonId;
+    private EditText name, phone, age, address;
+    private ImageView home, appointmentBtn, history;
+    private TextView date;
+    private RadioGroup gender;
+    private RadioButton selectedRadioButton;
+    private Button next;
+    private Spinner time;
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private int selectedRadioButtonId;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
 
     @Override

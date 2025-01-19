@@ -20,14 +20,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UpdateFrom extends AppCompatActivity {
-    EditText name, phone, age, address;
-    ImageView home, appointmentBtn, history;
-    TextView date;
-    TextView time;
-    FirebaseFirestore db;
-    FirebaseAuth mAuth;
-    Button update;
-    String documentId;
+    private EditText name, phone, age, address;
+    private ImageView home, appointmentBtn, history;
+    private TextView date;
+    private TextView time;
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private Button update;
+    private String documentId;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
 
     @Override

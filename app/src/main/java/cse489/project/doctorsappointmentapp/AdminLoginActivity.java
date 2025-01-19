@@ -1,8 +1,5 @@
 package cse489.project.doctorsappointmentapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,16 +36,17 @@ public class AdminLoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent i = new Intent(AdminLoginActivity.this, Homepage.class);
             startActivity(i);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.Email);
         password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.loginBtn);
@@ -54,21 +55,20 @@ public class AdminLoginActivity extends AppCompatActivity {
         password.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                final int Right=2;
-                if(event.getAction()==MotionEvent.ACTION_UP){
-                    if(event.getRawX()>=password.getRight()-password.getCompoundDrawables()[Right].getBounds().width()){
+                final int Right = 2;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= password.getRight() - password.getCompoundDrawables()[Right].getBounds().width()) {
                         int selection = password.getSelectionEnd();
-                        if(passwordVisible){
-                            password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_lock_24,0,R.drawable.baseline_visibility_off_24,0);
+                        if (passwordVisible) {
+                            password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_lock_24, 0, R.drawable.baseline_visibility_off_24, 0);
                             password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                            passwordVisible= false;
+                            passwordVisible = false;
 
-                        }
-                        else{
+                        } else {
 
-                            password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_lock_24,0, R.drawable.baseline_remove_red_eye_24,0);
+                            password.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_lock_24, 0, R.drawable.baseline_remove_red_eye_24, 0);
                             password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                            passwordVisible= true;
+                            passwordVisible = true;
 
                         }
                         password.setSelection(selection);
@@ -82,9 +82,9 @@ public class AdminLoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userEmail  = email.getText().toString();
-                String Password  = password.getText().toString();
-                String validationMessage = validateInputs(userEmail,Password);
+                String userEmail = email.getText().toString();
+                String Password = password.getText().toString();
+                String validationMessage = validateInputs(userEmail, Password);
 
 
                 if (!validationMessage.isEmpty()) {
@@ -96,25 +96,24 @@ public class AdminLoginActivity extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            mAuth.signInWithEmailAndPassword(userEmail,Password)
-                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(AdminLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(AdminLoginActivity.this, Homepage.class);
-                                                startActivity(i);
-                                                finish();
-                                            } else {
-                                                Toast.makeText(AdminLoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                            }
-                                            progressbar.setVisibility(View.INVISIBLE);
-                                            loginBtn.setBackgroundColor(Color.parseColor("#FF000000"));
-                                        }
-                                    });
+                            mAuth.signInWithEmailAndPassword(userEmail, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(AdminLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(AdminLoginActivity.this, Homepage.class);
+                                        startActivity(i);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(AdminLoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    progressbar.setVisibility(View.INVISIBLE);
+                                    loginBtn.setBackgroundColor(Color.parseColor("#FF000000"));
+                                }
+                            });
 
                         }
-                    },4000);
+                    }, 4000);
                 }
             }
         });
@@ -130,15 +129,16 @@ public class AdminLoginActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     private String validateInputs(String email, String password) {
         boolean isEmailValid = email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
         boolean isPasswordValid = password.matches("^(?=.*[a-zA-Z])(?=.*\\d).{6,}$");
         boolean empty = password.isEmpty() || email.isEmpty();
         if (empty) {
             return "You have to fill all the inputs correctly.";
-        }if (!isEmailValid) {
+        }
+        if (!isEmailValid) {
             return "Invalid Email.";
         } else if (!isPasswordValid) {
             return "Invalid Password.";

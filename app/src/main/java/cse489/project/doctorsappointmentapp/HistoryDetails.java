@@ -13,12 +13,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HistoryDetails extends AppCompatActivity {
-  TextView name,phone,age,time,date,address,gender,email, doctorID;
-  ImageView home,appointmentBtn,history;
+  private TextView name,phone,age,time,date,address,gender,email, doctorID;
+  private ImageView home,appointmentBtn,history;
 
 
-  FirebaseFirestore db;
-  FirebaseAuth mAuth;
+  private FirebaseFirestore db;
+  private FirebaseAuth mAuth;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
