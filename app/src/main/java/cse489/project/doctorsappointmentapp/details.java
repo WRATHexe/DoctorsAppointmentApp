@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class details extends AppCompatActivity {
-    ImageView home, appointmentBtn, history;
+    private ImageView home, appointmentBtn, history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

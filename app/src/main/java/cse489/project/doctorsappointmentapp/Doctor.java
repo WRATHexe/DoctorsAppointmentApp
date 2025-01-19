@@ -1,10 +1,10 @@
 package cse489.project.doctorsappointmentapp;
 
 public class Doctor {
-    private String documentId; // Firestore Document ID
-    private String name;
-    private String specialty;
-    private int imageResourceId; // For demo purposes; replace with URL for real data.
+    private final String documentId; // Firestore Document ID
+    private final String name;
+    private final String specialty;
+    private final int imageResourceId; // For demo purposes; replace with URL for real data.
 
     // Constructor
     public Doctor(String documentId, String name, String specialty, int imageResourceId) {

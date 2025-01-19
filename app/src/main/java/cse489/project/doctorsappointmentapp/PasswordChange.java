@@ -22,10 +22,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class PasswordChange extends AppCompatActivity {
-    ImageView home, appointmentBtn, history;
-    EditText CurrPass, NewPass;
-    Button changepass;
-    boolean passwordVisible;
+    private ImageView home, appointmentBtn, history;
+    private EditText CurrPass, NewPass;
+    private Button changepass;
+    private boolean passwordVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -30,14 +30,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText userName, email, password, confpassword;
-    Button signupBtn;
-    TextView loginNow;
-    boolean passwordVisible, confpasswordVisible;
-    String token;
-    ProgressBar progressbar;
-    FirebaseAuth mAuth;
-    FirebaseFirestore db;
+    private EditText userName, email, password, confpassword;
+    private Button signupBtn;
+    private TextView loginNow;
+    private boolean passwordVisible, confpasswordVisible;
+    private String token;
+    private ProgressBar progressbar;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     public void onStart() {

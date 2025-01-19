@@ -25,13 +25,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LogInActivity extends AppCompatActivity {
-  EditText email;
-  EditText password;
-  TextView signup, doctorbtn;
-  Button loginBtn;
-  boolean passwordVisible;
-  ProgressBar progressbar;
-  FirebaseAuth mAuth;
+  private EditText email;
+  private EditText password;
+  private TextView signup, doctorbtn;
+  private Button loginBtn;
+  private boolean passwordVisible;
+  private ProgressBar progressbar;
+  private FirebaseAuth mAuth;
 
   @Override
   public void onStart() {

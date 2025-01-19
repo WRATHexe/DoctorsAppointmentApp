@@ -24,10 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PreviewForm extends AppCompatActivity {
-    TextView name, phone, age, email, time, date, address, gender, doctorID;
-    Button submit, cancel;
-    FirebaseFirestore db;
-    FirebaseAuth mAuth;
+    private TextView name, phone, age, email, time, date, address, gender, doctorID;
+    private Button submit, cancel;
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
