@@ -40,9 +40,9 @@ public class History extends AppCompatActivity {
     setContentView(R.layout.activity_history);
     history_layout=findViewById(R.id.history_layout);
     Logout=findViewById(R.id.logout);
-    home=findViewById(R.id.home);
-    appointmentBtn=findViewById(R.id.appointmentBtn);
-    history=findViewById(R.id.history);
+//    home=findViewById(R.id.home);
+//    appointmentBtn=findViewById(R.id.appointmentBtn);
+//    history=findViewById(R.id.history);
     auth=FirebaseAuth.getInstance();
     db = FirebaseFirestore.getInstance();
     user=auth.getCurrentUser();
@@ -57,34 +57,34 @@ public class History extends AppCompatActivity {
       }
     });
     displayAppointmentsWithZeroValue();
-    home.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        Intent i = new Intent(History.this, Homepage.class);
-        startActivity(i);
-        finish();
-
-      }
-    });
-    appointmentBtn.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        Intent i = new Intent(History.this, AppontmentForm.class);
-        startActivity(i);
-
-      }
-    });
-    history.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        Intent i = new Intent(History.this, History.class);
-        startActivity(i);
-
-      }
-    });
+//    home.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//
+//        Intent i = new Intent(History.this, Homepage.class);
+//        startActivity(i);
+//        finish();
+//
+//      }
+//    });
+//    appointmentBtn.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//
+//        Intent i = new Intent(History.this, AppontmentForm.class);
+//        startActivity(i);
+//
+//      }
+//    });
+//    history.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//
+//        Intent i = new Intent(History.this, History.class);
+//        startActivity(i);
+//
+//      }
+//    });
   }
   private void displayAppointmentsWithZeroValue() {
     db.collection("appointments")
