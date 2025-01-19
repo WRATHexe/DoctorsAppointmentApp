@@ -6,85 +6,98 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".PreviewForm">
+
     <LinearLayout
         android:id="@+id/upperNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#673AB7">
-        <View
+        android:background="@color/theme"
+        android:orientation="horizontal">
+
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center"/>
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="Appointment Details"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
+            android:id="@+id/logout"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            />
+            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/baseline_logout_24" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/previewAppointment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/upperNav"
-        android:text="Appointment Details"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:background="@color/white"
-        android:padding="10dp"/>
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TableLayout
         android:id="@+id/inputForm"
-        android:layout_below="@id/previewAppointment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_below="@id/previewAppointment"
         android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp">
+        android:layout_marginRight="45dp"
+        android:background="@color/white">
         <!--Name-->
         <TableRow
 
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
 
-            android:layout_marginTop="5dp">
+            android:layout_marginBottom="5dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Patient's Name: "
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp">
-            </TextView>
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:padding="8dp"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </TableRow>
 
         <TableRow
 
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
 
-            android:layout_marginTop="5dp">
+            android:layout_marginBottom="5dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="E-mail: "
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp">
+                android:textSize="16sp"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -92,20 +105,19 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
         </TableRow>
 
         <TableRow
 
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -121,27 +133,27 @@
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </TableRow>
 
 
         <TableRow
 
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Age:"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp">
+                android:textSize="16sp"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -149,26 +161,26 @@
                 android:id="@+id/age"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </TableRow>
 
         <TableRow
 
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Time:"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp">
+                android:textSize="16sp"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -176,26 +188,26 @@
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </TableRow>
 
         <TableRow
 
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date:"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp">
+                android:textSize="16sp"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -203,153 +215,113 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1"/>
+                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Address:"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
 
             <TextView
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </TableRow>
 
 
-
         <TableRow
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Gender:"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/gender"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </TableRow>
+
         <TableRow
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Doctor ID:"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/doctorID"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text=""
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                android:layout_weight="1">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </TableRow>
     </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_below="@id/inputForm"
         android:layout_margin="10dp"
-        android:layout_below="@id/inputForm">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="#03A9F4"
-            android:text="update"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/theme"
+            android:text="Update"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-6dp"
-        android:background="#BA94FF"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/home"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:src="@drawable/baseline_home_24"
-            android:textColor="@color/black"
             android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/appointmentBtn"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:src="@drawable/baseline_form_view_24"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/history"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:src="@drawable/baseline_history_24"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
     </LinearLayout>
 
 </RelativeLayout>

@@ -70,11 +70,11 @@ public class Homepage extends AppCompatActivity {
     private void initializeViews() {
         Name = findViewById(R.id.name);
         Logout = findViewById(R.id.logout);
-        home = findViewById(R.id.home);
+        //home = findViewById(R.id.home);
         userAvatar = findViewById(R.id.userAvatar);
-        appointmentBtn = findViewById(R.id.appointmentBtn);
+        //appointmentBtn = findViewById(R.id.appointmentBtn);
         history = findViewById(R.id.history);
-        empty = findViewById(R.id.empty);
+        //empty = findViewById(R.id.empty);
         appointmentsLayout = findViewById(R.id.appointments_layout);
 
     }
@@ -281,12 +281,12 @@ public class Homepage extends AppCompatActivity {
 
         userAvatar.setOnClickListener(view -> startActivity(new Intent(Homepage.this, PasswordChange.class)));
 
-        home.setOnClickListener(view -> {
-            startActivity(new Intent(Homepage.this, Homepage.class));
-            finish();
-        });
+//        home.setOnClickListener(view -> {
+//            startActivity(new Intent(Homepage.this, Homepage.class));
+//            finish();
+//        });
 
-        appointmentBtn.setOnClickListener(view -> startActivity(new Intent(Homepage.this, AppontmentForm.class)));
+        //appointmentBtn.setOnClickListener(view -> startActivity(new Intent(Homepage.this, AppontmentForm.class)));
 
         history.setOnClickListener(view -> startActivity(new Intent(Homepage.this, History.class)));
     }
