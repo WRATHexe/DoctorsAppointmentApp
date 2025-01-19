@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,8 @@ public class DoctorLogin extends AppCompatActivity {
 
     private EditText email;
     private Button loginBtn;
+
+    private TextView loginNow;
     private ProgressBar progressbar;
 
     @Override
@@ -29,6 +32,13 @@ public class DoctorLogin extends AppCompatActivity {
         email = findViewById(R.id.email);
         loginBtn = findViewById(R.id.loginBtn);
         progressbar = findViewById(R.id.progressBar);
+        loginNow = findViewById(R.id.doctorbtn);
+        loginNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DoctorLogin.this, DoctorSignUp.class));
+            }
+        });
 
         // Initialize Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
