@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PreviewForm extends AppCompatActivity {
-    TextView name, phone, age, email, time, date, address, gender;
+    TextView name, phone, age, email, time, date, address, gender, doctorID;
     Button submit, cancel;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -45,6 +45,7 @@ public class PreviewForm extends AppCompatActivity {
         date = findViewById(R.id.date);
         submit = findViewById(R.id.submit);
         cancel = findViewById(R.id.cancel);
+        doctorID = findViewById(R.id.doctorID);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -55,6 +56,10 @@ public class PreviewForm extends AppCompatActivity {
         String Address = extras.getString("address");
         String Gender = extras.getString("gender");
         String Date = extras.getString("date");
+        String d_id = extras.getString("d_id");
+        String d_name = extras.getString("d_name");
+        String d_sp = extras.getString("d_sp");
+        doctorID.setText(d_name+" | "+d_sp);
         name.setText(Name);
         phone.setText(Phone);
         age.setText(Age);
@@ -78,6 +83,7 @@ public class PreviewForm extends AppCompatActivity {
                     appointment.put("date", Date);
                     appointment.put("address", Address);
                     appointment.put("gender", Gender);
+                    appointment.put("d_id", d_id);
                     appointment.put("passed", "0");
                     db.collection("appointments").add(appointment).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override

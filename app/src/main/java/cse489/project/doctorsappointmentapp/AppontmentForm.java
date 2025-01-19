@@ -84,7 +84,11 @@ public class AppontmentForm extends AppCompatActivity {
                     selectedRadioButtonId = gender.getCheckedRadioButtonId();
                     selectedRadioButton = findViewById(selectedRadioButtonId);
                     String Gender = selectedRadioButton.getText().toString();
-                    checkAppointmentExistence(Time, Date, Name, Phone, Age, Address, Gender);
+                    Intent i = getIntent();
+                    String d_id = i.getStringExtra("DOCTOR-ID");
+                    String d_name = i.getStringExtra("DOCTOR-NAME");
+                    String d_sp = i.getStringExtra("DOCTOR-SPECIALTY");
+                    checkAppointmentExistence(Time, Date, Name, Phone, Age, Address, Gender, d_id, d_name, d_sp);
                 }
             }
         });
@@ -200,7 +204,7 @@ public class AppontmentForm extends AppCompatActivity {
         return true;
     }
 
-    private void checkAppointmentExistence(String time, String date, String name, String phone, String age, String address, String gender) {
+    private void checkAppointmentExistence(String time, String date, String name, String phone, String age, String address, String gender, String d_id, String d_name, String d_sp) {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -212,7 +216,7 @@ public class AppontmentForm extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         if (!task.getResult().isEmpty()) {
                             Toast.makeText(AppontmentForm.this, "Please choose another time slot.", Toast.LENGTH_SHORT).show();
-                            System.out.println("Ok");
+                            //System.out.println("Ok");
                         } else {
                             db.collection("appointments").whereEqualTo("p_id", userId).whereEqualTo("date", date).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -231,6 +235,9 @@ public class AppontmentForm extends AppCompatActivity {
                                             b.putString("address", address);
                                             b.putString("gender", gender);
                                             b.putString("date", date);
+                                            b.putString("d_id", d_id);
+                                            b.putString("d_name", d_name);
+                                            b.putString("d_sp", d_sp);
                                             previewIntent.putExtras(b);
                                             startActivity(previewIntent);
                                         }
