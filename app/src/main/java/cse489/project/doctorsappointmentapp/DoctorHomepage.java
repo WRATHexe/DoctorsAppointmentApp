@@ -111,6 +111,14 @@ public class DoctorHomepage extends AppCompatActivity {
         String name = document.getString("name");
         String d_id = document.getString("d_id");
 
+        String phone = document.getString("phone");
+        String age = document.getString("age");
+        String address = document.getString("address");
+        String gender = document.getString("gender");
+        String email = document.getString("email");
+        String documentId = document.getId();
+        String passed = document.getString("passed");
+
         // Inflate the card layout
         View appointmentCard = getLayoutInflater().inflate(R.layout.layout_appointmentlist, null);
         TextView dateTextView = appointmentCard.findViewById(R.id.datelist);
@@ -144,6 +152,20 @@ public class DoctorHomepage extends AppCompatActivity {
 //            showCancelDialog(this, appointmentDate, appointmentTime);
 //            return true;
 //        });
+        appointmentCard.setOnClickListener(view -> {
+            Intent detailsIntent = new Intent(DoctorHomepage.this, AppointmentDetails.class);
+            detailsIntent.putExtra("date", appointmentDate);
+            detailsIntent.putExtra("time", appointmentTime);
+            detailsIntent.putExtra("name", name);
+            detailsIntent.putExtra("phone", phone);
+            detailsIntent.putExtra("age", age);
+            detailsIntent.putExtra("address", address);
+            detailsIntent.putExtra("gender", gender);
+            detailsIntent.putExtra("email", email);
+            detailsIntent.putExtra("d_id", d_id);
+            detailsIntent.putExtra("from", "doctor");
+            startActivity(detailsIntent);
+        });
     }
 
     private void showCancelDialog(final Context context, final String date, final String time) {
