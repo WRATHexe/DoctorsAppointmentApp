@@ -104,6 +104,7 @@ public class History extends AppCompatActivity {
                 String address = document.getString("address");
                 String email = document.getString("email");
                 String gender = document.getString("gender");
+                String d_id = document.getString("d_id");
 
 
                 View appointmentCard = getLayoutInflater().inflate(R.layout.historycard, null);
@@ -134,7 +135,9 @@ public class History extends AppCompatActivity {
                     b.putString("date", appointmentDate);
                     b.putString("gender", gender);
                     b.putString("email", email);
+                    b.putString("d_id", d_id);
                     historydetailsIntent.putExtras(b);
+                    System.out.println(name + " " + phone + " " + age + " " + appointmentTime + " " + address + " " + appointmentDate + " " + gender + " " + email + " " + d_id);
                     startActivity(historydetailsIntent);
 
                   }

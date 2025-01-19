@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AppointmentDetails extends AppCompatActivity {
-    TextView name, phone, age, time, date, address, gender, email;
+    TextView name, phone, age, time, date, address, gender, email, doctorID;
     ImageView home, appointmentBtn, history;
 
     Button update;
@@ -38,6 +38,7 @@ public class AppointmentDetails extends AppCompatActivity {
         home = findViewById(R.id.home);
         appointmentBtn = findViewById(R.id.appointmentBtn);
         history = findViewById(R.id.history);
+        doctorID = findViewById(R.id.doctorID);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -51,7 +52,8 @@ public class AppointmentDetails extends AppCompatActivity {
         String p_id = extras.getString("p_id");
         String Gender = extras.getString("gender");
         String Email = extras.getString("email");
-
+        String d_id = extras.getString("d_id");
+        System.out.println(Name + " " + Phone + " " + Age + " " + Time + " " + Address + " " + Date + " " + documentId + " " + p_id + " " + Gender + " " + Email + " " + d_id);
         name.setText(Name);
         phone.setText(Phone);
         age.setText(Age);
@@ -60,6 +62,7 @@ public class AppointmentDetails extends AppCompatActivity {
         date.setText(Date);
         gender.setText(Gender);
         email.setText(Email);
+        doctorID.setText(d_id);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
