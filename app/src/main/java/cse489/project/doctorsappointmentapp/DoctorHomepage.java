@@ -140,10 +140,10 @@ public class DoctorHomepage extends AppCompatActivity {
         appointmentsLayout.addView(appointmentCard);
 
         // Set long click listener for canceling appointment
-        appointmentCard.setOnLongClickListener(v -> {
-            showCancelDialog(this, appointmentDate, appointmentTime);
-            return true;
-        });
+//        appointmentCard.setOnLongClickListener(v -> {
+//            showCancelDialog(this, appointmentDate, appointmentTime);
+//            return true;
+//        });
     }
 
     private void showCancelDialog(final Context context, final String date, final String time) {
