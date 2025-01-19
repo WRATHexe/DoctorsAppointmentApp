@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,6 +22,7 @@ public class DoctorSignUp extends AppCompatActivity {
 
     private EditText name;
     private Spinner doctorSpecialtySpinner;
+    private TextView loginNow;
     private Button submitButton;
     private String selectedSpecialty = "";
 
@@ -34,13 +35,15 @@ public class DoctorSignUp extends AppCompatActivity {
         name = findViewById(R.id.name);
         doctorSpecialtySpinner = findViewById(R.id.doctorSpecialty);
         submitButton = findViewById(R.id.signupBtn);
-
+        loginNow = findViewById(R.id.loginNow);
+        loginNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DoctorSignUp.this, DoctorLogin.class));
+            }
+        });
         // Set up Spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.doctor_specialties,
-                android.R.layout.simple_spinner_item
-        );
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.doctor_specialties, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         doctorSpecialtySpinner.setAdapter(adapter);
 
@@ -91,18 +94,15 @@ public class DoctorSignUp extends AppCompatActivity {
         doctorData.put("specialty", specialty);
 
         // Add the data to a collection named "doctors"
-        db.collection("doctors")
-                .add(doctorData)
-                .addOnSuccessListener(documentReference -> {
-                    // Data added successfully
-                    System.out.println("Doctor added with ID: " + documentReference.getId());
-                    Toast.makeText(this, "You have been successfully listed", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(DoctorSignUp.this, LogInActivity.class));
-                })
-                .addOnFailureListener(e -> {
-                    // Error occurred while adding data
-                    System.err.println("Error adding doctor: " + e.getMessage());
-                    Toast.makeText(this, "There was an error during data entry", Toast.LENGTH_SHORT).show();
-                });
+        db.collection("doctors").add(doctorData).addOnSuccessListener(documentReference -> {
+            // Data added successfully
+            System.out.println("Doctor added with ID: " + documentReference.getId());
+            Toast.makeText(this, "You have been successfully listed", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(DoctorSignUp.this, LogInActivity.class));
+        }).addOnFailureListener(e -> {
+            // Error occurred while adding data
+            System.err.println("Error adding doctor: " + e.getMessage());
+            Toast.makeText(this, "There was an error during data entry", Toast.LENGTH_SHORT).show();
+        });
     }
 }
