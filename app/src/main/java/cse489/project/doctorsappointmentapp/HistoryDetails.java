@@ -34,9 +34,9 @@ public class HistoryDetails extends AppCompatActivity {
     date = findViewById(R.id.date);
     gender = findViewById(R.id.gender);
     email = findViewById(R.id.email);
-    home=findViewById(R.id.home);
-    appointmentBtn=findViewById(R.id.appointmentBtn);
-    history=findViewById(R.id.history);
+    //home=findViewById(R.id.home);
+   // appointmentBtn=findViewById(R.id.appointmentBtn);
+    //history=findViewById(R.id.history);
     doctorID= findViewById(R.id.doctorID);
 
 
@@ -61,33 +61,33 @@ public class HistoryDetails extends AppCompatActivity {
     gender.setText(Gender);
     email.setText(Email);
     doctorID.setText(d_id);
-    home.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        Intent i = new Intent(HistoryDetails.this, Homepage.class);
-        startActivity(i);
-        finish();
-
-      }
-    });
-    appointmentBtn.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        Intent i = new Intent(HistoryDetails.this, AppontmentForm.class);
-        startActivity(i);
-
-      }
-    });
-    history.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        Intent i = new Intent(HistoryDetails.this, History.class);
-        startActivity(i);
-
-      }
-    });
+//    home.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//
+//        Intent i = new Intent(HistoryDetails.this, Homepage.class);
+//        startActivity(i);
+//        finish();
+//
+//      }
+//    });
+//    appointmentBtn.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//
+//        Intent i = new Intent(HistoryDetails.this, AppontmentForm.class);
+//        startActivity(i);
+//
+//      }
+//    });
+//    history.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//
+//        Intent i = new Intent(HistoryDetails.this, History.class);
+//        startActivity(i);
+//
+//      }
+//    });
   }
 }

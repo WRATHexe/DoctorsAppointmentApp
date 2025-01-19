@@ -35,9 +35,9 @@ public class AppointmentDetails extends AppCompatActivity {
         gender = findViewById(R.id.gender);
         email = findViewById(R.id.email);
         update = findViewById(R.id.update);
-        home = findViewById(R.id.home);
-        appointmentBtn = findViewById(R.id.appointmentBtn);
-        history = findViewById(R.id.history);
+        //home = findViewById(R.id.home);
+        //appointmentBtn = findViewById(R.id.appointmentBtn);
+        //history = findViewById(R.id.history);
         doctorID = findViewById(R.id.doctorID);
 
         Intent intent = getIntent();
@@ -63,34 +63,34 @@ public class AppointmentDetails extends AppCompatActivity {
         gender.setText(Gender);
         email.setText(Email);
         doctorID.setText(d_id);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(AppointmentDetails.this, Homepage.class);
-                startActivity(i);
-                finish();
-
-            }
-        });
-        appointmentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(AppointmentDetails.this, AppontmentForm.class);
-                startActivity(i);
-
-            }
-        });
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(AppointmentDetails.this, History.class);
-                startActivity(i);
-
-            }
-        });
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(AppointmentDetails.this, Homepage.class);
+//                startActivity(i);
+//                finish();
+//
+//            }
+//        });
+//        appointmentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(AppointmentDetails.this, AppontmentForm.class);
+//                startActivity(i);
+//
+//            }
+//        });
+//        history.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(AppointmentDetails.this, History.class);
+//                startActivity(i);
+//
+//            }
+//        });
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
