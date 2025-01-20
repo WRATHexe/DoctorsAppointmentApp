@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Objects;
-
 public class AppointmentDetails extends AppCompatActivity {
     private TextView name, phone, age, time, date, address, gender, email, doctorID;
     private ImageView home, appointmentBtn, history;
@@ -94,10 +92,6 @@ public class AppointmentDetails extends AppCompatActivity {
 //            }
 //        });
 
-
-        if(Objects.equals(extras.getString("from"), "doctor")){
-            update.setVisibility(View.GONE);
-        }
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
