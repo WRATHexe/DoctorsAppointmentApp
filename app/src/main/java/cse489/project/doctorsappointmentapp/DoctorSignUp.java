@@ -92,17 +92,19 @@ public class DoctorSignUp extends AppCompatActivity {
         Map<String, Object> doctorData = new HashMap<>();
         doctorData.put("doctorName", doctorName);
         doctorData.put("specialty", specialty);
+        doctorData.put("app", 0);
 
         // Add the data to a collection named "doctors"
         db.collection("doctors").add(doctorData).addOnSuccessListener(documentReference -> {
             // Data added successfully
             System.out.println("Doctor added with ID: " + documentReference.getId());
             Toast.makeText(this, "You have been successfully listed", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(DoctorSignUp.this, LogInActivity.class));
+            startActivity(new Intent(DoctorSignUp.this, DoctorLogin.class));
         }).addOnFailureListener(e -> {
             // Error occurred while adding data
             System.err.println("Error adding doctor: " + e.getMessage());
             Toast.makeText(this, "There was an error during data entry", Toast.LENGTH_SHORT).show();
         });
     }
+
 }

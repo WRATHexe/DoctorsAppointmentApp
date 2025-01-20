@@ -67,15 +67,21 @@ public class DoctorLogin extends AppCompatActivity {
 
                             if (task.isSuccessful()) {
                                 QuerySnapshot querySnapshot = task.getResult();
-                                DocumentSnapshot document = querySnapshot.getDocuments().get(0);
                                 if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                                    // Doctor found
-                                    Toast.makeText(DoctorLogin.this, "Login successful "+ document.getId(), Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(DoctorLogin.this, DoctorHomepage.class);
-                                    i.putExtra("DOCTOR-ID", document.getId());
-                                    i.putExtra("DOCTOR-NAME", document.getString("doctorName"));
-                                    startActivity(i);
-                                    finish();
+                                    DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+
+                                    if (document.getLong("app") == 1) {
+                                        // Doctor found and app = 1
+                                        Toast.makeText(DoctorLogin.this, "Login successful " + document.getId(), Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(DoctorLogin.this, DoctorHomepage.class);
+                                        i.putExtra("DOCTOR-ID", document.getId());
+                                        i.putExtra("DOCTOR-NAME", document.getString("doctorName"));
+                                        startActivity(i);
+                                        finish();
+                                    } else if (document.getLong("app") == 0) {
+                                        // Doctor found but app = 0
+                                        Toast.makeText(DoctorLogin.this, "Access restricted. Contact admin.", Toast.LENGTH_SHORT).show();
+                                    }
                                 } else {
                                     // Doctor not found
                                     Toast.makeText(DoctorLogin.this, "Doctor not found", Toast.LENGTH_SHORT).show();

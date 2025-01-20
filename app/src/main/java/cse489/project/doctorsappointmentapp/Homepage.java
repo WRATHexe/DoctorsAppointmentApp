@@ -94,6 +94,7 @@ public class Homepage extends AppCompatActivity {
             }
         }
     }
+
     private void initializeViews() {
         Name = findViewById(R.id.name);
         Logout = findViewById(R.id.logout);
