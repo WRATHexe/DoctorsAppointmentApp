@@ -69,6 +69,13 @@
                 android:textColorHint="@color/grey"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="20dp"/>
+
+            <CheckBox
+                android:id="@+id/rememberMe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remember Me"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -80,12 +87,12 @@
                     android:text="Login"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="2dp"
                     android:backgroundTint="@color/theme2"
                     app:cornerRadius="20dp"
                     android:onClick="onLoginButtonClick"/>
                 <ProgressBar
-                    android:layout_margin="25dp"
+                    android:layout_margin="2dp"
                     android:id="@+id/progressBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
