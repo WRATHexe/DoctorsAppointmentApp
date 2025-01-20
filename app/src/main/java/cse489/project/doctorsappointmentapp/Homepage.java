@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -77,6 +76,7 @@ public class Homepage extends AppCompatActivity {
         history = findViewById(R.id.history);
         //empty = findViewById(R.id.empty);
         appointmentsLayout = findViewById(R.id.appointments_layout);
+
     }
 
     private void checkUserAuthentication() {
