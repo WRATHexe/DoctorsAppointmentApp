@@ -3,8 +3,11 @@ package cse489.project.doctorsappointmentapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -33,6 +36,7 @@ public class LogInActivity extends AppCompatActivity {
   private ProgressBar progressbar;
   private FirebaseAuth mAuth;
 
+
   @Override
   public void onStart() {
     super.onStart();
@@ -46,7 +50,10 @@ public class LogInActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_log_in);
-    mAuth=FirebaseAuth.getInstance();
+
+
+
+      mAuth=FirebaseAuth.getInstance();
     email = findViewById(R.id.email);
     password = findViewById(R.id.password);
     loginBtn = findViewById(R.id.loginBtn);
@@ -154,4 +161,7 @@ public class LogInActivity extends AppCompatActivity {
 
     return "";
   }
+
+
+
 }
