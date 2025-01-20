@@ -151,7 +151,7 @@ public class UpdateFrom extends AppCompatActivity {
                 }
             });
         } else {
-            System.out.println("Error");
+            Toast.makeText(this, "no user found", Toast.LENGTH_SHORT).show();
         }
     }
 

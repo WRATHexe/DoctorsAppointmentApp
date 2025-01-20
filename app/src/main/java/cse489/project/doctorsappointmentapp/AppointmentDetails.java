@@ -104,6 +104,7 @@ public class AppointmentDetails extends AppCompatActivity {
                 b.putString("date", Date);
                 b.putString("time", Time);
                 b.putString("documentId", documentId);
+                System.out.println(documentId);
                 b.putString("p_id", p_id);
                 updateIntent.putExtras(b);
                 startActivity(updateIntent);
