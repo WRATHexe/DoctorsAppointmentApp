@@ -35,7 +35,7 @@ public class DoctorHomepage extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_homepage);
 
         // Initialize UI components
-        empty = findViewById(R.id.empty);
+        // empty = findViewById(R.id.empty);
         Logout = findViewById(R.id.logout);
         userAvatar = findViewById(R.id.userAvatar);
         appointmentsLayout = findViewById(R.id.appointments_layout);
