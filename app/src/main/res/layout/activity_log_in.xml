@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Dont't Have an Account yet ? "
+            android:text="Doesn't Have an Account yet ? "
             android:textSize="14sp"
             android:textAlignment="center"
             android:textColor="@color/black"/>
