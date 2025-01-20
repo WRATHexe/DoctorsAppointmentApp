@@ -253,6 +253,7 @@ public class Homepage extends AppCompatActivity {
                             // Set click listener to view appointment details
                             appointmentCard.setOnClickListener(view -> {
                                 Intent detailsIntent = new Intent(Homepage.this, AppointmentDetails.class);
+                                detailsIntent.putExtra("documentId", documentId);
                                 detailsIntent.putExtra("date", appointmentDate);
                                 detailsIntent.putExtra("time", appointmentTime);
                                 detailsIntent.putExtra("name", name);
