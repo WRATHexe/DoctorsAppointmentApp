@@ -74,7 +74,7 @@ public class Homepage extends AppCompatActivity {
         userAvatar = findViewById(R.id.userAvatar);
         //appointmentBtn = findViewById(R.id.appointmentBtn);
         history = findViewById(R.id.history);
-        //empty = findViewById(R.id.empty);
+        empty = findViewById(R.id.empty);
         appointmentsLayout = findViewById(R.id.appointments_layout);
 
     }
@@ -267,7 +267,7 @@ public class Homepage extends AppCompatActivity {
                         }
                     } else {
                         // No appointments found
-                        empty.setText("No Upcoming Appointments");
+                        //empty.setText("No Upcoming Appointments");
                     }
                 });
     }
