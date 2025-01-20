@@ -179,6 +179,10 @@ public class AppontmentForm extends AppCompatActivity {
             phone.setError("Phone number cannot be empty");
             return false;
         }
+        if (!isValidBangladeshiPhoneNumber(phone.getText().toString())) {
+            phone.setError("Enter a valid number 016010000000");
+            return false;
+        }
         if (age.getText().toString().isEmpty()) {
             age.setError("Age cannot be empty");
             return false;
@@ -197,12 +201,18 @@ public class AppontmentForm extends AppCompatActivity {
             return false;
         }
         if (date.getText().toString().isEmpty()) {
-            date.setError("date cannot be empty");
+            date.setError("Date cannot be empty");
             return false;
         }
 
         return true;
     }
+    private boolean isValidBangladeshiPhoneNumber(String phoneNumber) {
+        // Regular expression for Bangladeshi phone numbers
+        String bangladeshiNumberPattern = "^(01[3-9]\\d{8})$";
+        return phoneNumber.matches(bangladeshiNumberPattern);
+    }
+
 
     private void checkAppointmentExistence(String time, String date, String name, String phone, String age, String address, String gender, String d_id, String d_name, String d_sp) {
 
