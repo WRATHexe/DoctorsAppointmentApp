@@ -3,9 +3,7 @@ package cse489.project.doctorsappointmentapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +13,6 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,27 +32,16 @@ public class LogInActivity extends AppCompatActivity {
   private boolean passwordVisible;
   private ProgressBar progressbar;
   private FirebaseAuth mAuth;
-  private CheckBox rememberMe;
 
   @Override
   public void onStart() {
     super.onStart();
-    SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-    boolean rememberMeChecked = sharedPreferences.getBoolean("rememberMe", false);
-    if (rememberMeChecked) {
-      String savedEmail = sharedPreferences.getString("email", "");
-      String savedPassword = sharedPreferences.getString("password", "");
-      email.setText(savedEmail);
-      password.setText(savedPassword);
-        rememberMe.setChecked(true);
-    }
     FirebaseUser currentUser = mAuth.getCurrentUser();
     if(currentUser != null){
       Intent i = new Intent(LogInActivity.this, Homepage.class);
       startActivity(i);
     }
   }
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -67,26 +53,6 @@ public class LogInActivity extends AppCompatActivity {
     signup = findViewById(R.id.signupNow);
     progressbar = findViewById(R.id.progressBar);
     doctorbtn = findViewById(R.id.doctorbtn);
-    rememberMe = findViewById(R.id.rememberMe);
-
-    rememberMe.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        if (rememberMe.isChecked()) {
-          editor.putBoolean("rememberMe", true);
-          editor.putString("email", email.getText().toString());
-          editor.putString("password", password.getText().toString());
-        } else {
-          editor.putBoolean("rememberMe", false);
-          editor.putString("email", "");
-          editor.putString("password", "");
-        }
-        editor.apply();
-      }
-    });
-
     password.setOnTouchListener(new View.OnTouchListener() {
       @Override
       public boolean onTouch(View v, MotionEvent event) {
@@ -150,7 +116,7 @@ public class LogInActivity extends AppCompatActivity {
                   });
 
             }
-          },2000);
+          },4000);
         }
       }
     });

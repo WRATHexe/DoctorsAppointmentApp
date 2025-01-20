@@ -102,7 +102,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/theme2"
+                android:backgroundTint="@color/theme"
                 app:cornerRadius = "20dp"/>
             <ProgressBar
                 android:layout_margin="25dp"
