@@ -3,10 +3,16 @@ package cse489.project.doctorsappointmentapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.annotation.SuppressLint;
+
+import android.app.ActivityManager;
+import android.content.Context;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -28,6 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LogInActivity extends AppCompatActivity {
+
     private EditText email;
     private EditText password;
     private TextView signup, doctorbtn;
@@ -55,6 +62,7 @@ public class LogInActivity extends AppCompatActivity {
             startActivity(i);
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,4 +190,5 @@ public class LogInActivity extends AppCompatActivity {
 
         return "";
     }
+
 }
