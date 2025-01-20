@@ -106,4 +106,5 @@ public class DoctorSignUp extends AppCompatActivity {
             Toast.makeText(this, "There was an error during data entry", Toast.LENGTH_SHORT).show();
         });
     }
+
 }
