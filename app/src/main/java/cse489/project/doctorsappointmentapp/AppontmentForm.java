@@ -181,6 +181,7 @@ public class AppontmentForm extends AppCompatActivity {
         }
         if (!isValidBangladeshiPhoneNumber(phone.getText().toString())) {
             phone.setError("Enter a valid number 016010000000");
+            Toast.makeText(this, "Add a valid Bangladeshi number", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (age.getText().toString().isEmpty()) {
