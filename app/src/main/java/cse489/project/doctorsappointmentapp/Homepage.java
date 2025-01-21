@@ -1,17 +1,11 @@
 package cse489.project.doctorsappointmentapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,17 +13,21 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,13 +70,11 @@ public class Homepage extends AppCompatActivity {
         // Handle navigation and button clicks
         handleNavigationClicks();
     }
+
     private void requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                        NOTIFICATION_PERMISSION_REQUEST_CODE);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST_CODE);
             }
         }
     }
@@ -137,7 +133,7 @@ public class Homepage extends AppCompatActivity {
                 Doctor clickedDoctor = doctorList.get(position);
                 //Toast.makeText(Homepage.this, "View Details for: " + clickedDoctor.getDocumentId(), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Homepage.this, AppontmentForm.class);
-                i.putExtra("DOCTOR-ID", clickedDoctor.getDocumentId() );
+                i.putExtra("DOCTOR-ID", clickedDoctor.getDocumentId());
                 i.putExtra("DOCTOR-NAME", clickedDoctor.getName());
                 i.putExtra("DOCTOR-SPECIALTY", clickedDoctor.getSpecialty());
                 startActivity(i);
@@ -150,155 +146,146 @@ public class Homepage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // Query Firestore for doctor data
-        db.collection("doctors")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        doctorList.clear(); // Clear the list to prevent duplicates
+        db.collection("doctors").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                doctorList.clear(); // Clear the list to prevent duplicates
 
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String documentId = document.getId();
-                            String name = document.getString("doctorName");
-                            String specialty = document.getString("specialty");
-                            int imageResId = R.drawable.doc; // Placeholder for dynamic image handling
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    if (document.getLong("app") == 1) {
+                        String documentId = document.getId();
+                        String name = document.getString("doctorName");
+                        String specialty = document.getString("specialty");
+                        int imageResId = R.drawable.doc; // Placeholder for dynamic image handling
 
-                            doctorList.add(new Doctor(documentId, name, specialty, imageResId));
-                        }
+                        doctorList.add(new Doctor(documentId, name, specialty, imageResId));
+                    }else{
 
-                        adapter.notifyDataSetChanged();
-                    } else {
-                        Toast.makeText(this, "Failed to load data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+                adapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(this, "Failed to load data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void displayUserAppointments() {
-        db.collection("appointments")
-                .whereEqualTo("p_id", user.getUid())
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Calendar currentCalendar = Calendar.getInstance();
-                        currentCalendar.set(Calendar.SECOND, 0);
-                        currentCalendar.set(Calendar.MILLISECOND, 0);
+        db.collection("appointments").whereEqualTo("p_id", user.getUid()).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Calendar currentCalendar = Calendar.getInstance();
+                currentCalendar.set(Calendar.SECOND, 0);
+                currentCalendar.set(Calendar.MILLISECOND, 0);
 
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String appointmentDate = document.getString("date");
-                            String appointmentTimeRange = document.getString("time");
-                            String value = document.getString("passed");
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String appointmentDate = document.getString("date");
+                    String appointmentTimeRange = document.getString("time");
+                    String value = document.getString("passed");
 
-                            if (appointmentTimeRange != null && "0".equals(value)) {
-                                try {
-                                    String[] timeSplit = appointmentTimeRange.split("-");
-                                    String startTime = timeSplit[0].trim();
-                                    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault());
-                                    String combinedDateTime = appointmentDate + " " + startTime + " PM";
-                                    Calendar storedCalendar = Calendar.getInstance();
-                                    storedCalendar.setTime(dateTimeFormat.parse(combinedDateTime));
-                                    storedCalendar.set(Calendar.SECOND, 0);
-                                    storedCalendar.set(Calendar.MILLISECOND, 0);
+                    if (appointmentTimeRange != null && "0".equals(value)) {
+                        try {
+                            String[] timeSplit = appointmentTimeRange.split("-");
+                            String startTime = timeSplit[0].trim();
+                            SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault());
+                            String combinedDateTime = appointmentDate + " " + startTime + " PM";
+                            Calendar storedCalendar = Calendar.getInstance();
+                            storedCalendar.setTime(dateTimeFormat.parse(combinedDateTime));
+                            storedCalendar.set(Calendar.SECOND, 0);
+                            storedCalendar.set(Calendar.MILLISECOND, 0);
 
-                                    if (storedCalendar.before(currentCalendar)) {
-                                        document.getReference().update("passed", "1");
-                                        Log.d("Appointment", "Updated passed value");
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                            if (storedCalendar.before(currentCalendar)) {
+                                document.getReference().update("passed", "1");
+                                Log.d("Appointment", "Updated passed value");
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        displayAppointmentsWithZeroValue();
-                    } else {
-                        Log.d("Appointment", "Task unsuccessful: " + task.getException());
                     }
-                });
+                }
+                displayAppointmentsWithZeroValue();
+            } else {
+                Log.d("Appointment", "Task unsuccessful: " + task.getException());
+            }
+        });
     }
 
     private void displayAppointmentsWithZeroValue() {
-        db.collection("appointments")
-                .whereEqualTo("p_id", user.getUid())
-                .whereEqualTo("passed", "0")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String appointmentDate = document.getString("date");
-                            String appointmentTime = document.getString("time");
-                            String name = document.getString("name");
-                            String phone = document.getString("phone");
-                            String age = document.getString("age");
-                            String address = document.getString("address");
-                            String gender = document.getString("gender");
-                            String email = document.getString("email");
-                            String d_id = document.getString("d_id"); // Doctor ID
-                            String documentId = document.getId();
-                            String passed = document.getString("passed");
+        db.collection("appointments").whereEqualTo("p_id", user.getUid()).whereEqualTo("passed", "0").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String appointmentDate = document.getString("date");
+                    String appointmentTime = document.getString("time");
+                    String name = document.getString("name");
+                    String phone = document.getString("phone");
+                    String age = document.getString("age");
+                    String address = document.getString("address");
+                    String gender = document.getString("gender");
+                    String email = document.getString("email");
+                    String d_id = document.getString("d_id"); // Doctor ID
+                    String documentId = document.getId();
+                    String passed = document.getString("passed");
 
-                            // Inflate the appointment card layout
-                            View appointmentCard = getLayoutInflater().inflate(R.layout.layout_appointmentlist, null);
-                            TextView dateTextView = appointmentCard.findViewById(R.id.datelist);
-                            TextView timeTextView = appointmentCard.findViewById(R.id.timelist);
-                            TextView nameTextView = appointmentCard.findViewById(R.id.name);
-                            TextView doctorInfoTV = appointmentCard.findViewById(R.id.doctorInfoTV);
+                    // Inflate the appointment card layout
+                    View appointmentCard = getLayoutInflater().inflate(R.layout.layout_appointmentlist, null);
+                    TextView dateTextView = appointmentCard.findViewById(R.id.datelist);
+                    TextView timeTextView = appointmentCard.findViewById(R.id.timelist);
+                    TextView nameTextView = appointmentCard.findViewById(R.id.name);
+                    TextView doctorInfoTV = appointmentCard.findViewById(R.id.doctorInfoTV);
 
-                            // Populate appointment details
-                            dateTextView.setText(appointmentDate);
-                            timeTextView.setText(appointmentTime + " PM");
-                            nameTextView.setText(name);
+                    // Populate appointment details
+                    dateTextView.setText(appointmentDate);
+                    timeTextView.setText(appointmentTime + " PM");
+                    nameTextView.setText(name);
 
-                            // Fetch and display doctor information based on d_id
-                            if (d_id != null && !d_id.isEmpty()) {
-                                db.collection("doctors").document(d_id).get()
-                                        .addOnSuccessListener(doctorSnapshot -> {
-                                            if (doctorSnapshot.exists()) {
-                                                String doc_name = doctorSnapshot.getString("doctorName");
-                                                String doc_sp = doctorSnapshot.getString("specialty");
+                    // Fetch and display doctor information based on d_id
+                    if (d_id != null && !d_id.isEmpty()) {
+                        db.collection("doctors").document(d_id).get().addOnSuccessListener(doctorSnapshot -> {
+                            if (doctorSnapshot.exists()) {
+                                String doc_name = doctorSnapshot.getString("doctorName");
+                                String doc_sp = doctorSnapshot.getString("specialty");
 
-                                                // Update doctor information TextView
-                                                doctorInfoTV.setText("You have an appointment with Dr. " + doc_name +
-                                                        ", " + doc_sp + ".");
-                                            } else {
-                                                doctorInfoTV.setText("Doctor information could not be retrieved.");
-                                            }
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            doctorInfoTV.setText("Error retrieving doctor information.");
-                                            e.printStackTrace();
-                                        });
+                                // Update doctor information TextView
+                                doctorInfoTV.setText("You have an appointment with Dr. " + doc_name + ", " + doc_sp + ".");
                             } else {
-                                doctorInfoTV.setText("Doctor ID is missing in the appointment.");
+                                doctorInfoTV.setText("Doctor information could not be retrieved.");
                             }
-
-                            // Add the card to the appointments layout
-                            appointmentsLayout.addView(appointmentCard);
-
-                            // Set long click listener for canceling appointment
-                            appointmentCard.setOnLongClickListener(v -> {
-                                showCancelDialog(this, appointmentDate, appointmentTime);
-                                return true;
-                            });
-
-                            // Set click listener to view appointment details
-                            appointmentCard.setOnClickListener(view -> {
-                                Intent detailsIntent = new Intent(Homepage.this, AppointmentDetails.class);
-                                detailsIntent.putExtra("documentId", documentId);
-                                detailsIntent.putExtra("date", appointmentDate);
-                                detailsIntent.putExtra("time", appointmentTime);
-                                detailsIntent.putExtra("name", name);
-                                detailsIntent.putExtra("phone", phone);
-                                detailsIntent.putExtra("age", age);
-                                detailsIntent.putExtra("address", address);
-                                detailsIntent.putExtra("gender", gender);
-                                detailsIntent.putExtra("email", email);
-                                detailsIntent.putExtra("d_id", d_id);
-                                startActivity(detailsIntent);
-                            });
-                        }
+                        }).addOnFailureListener(e -> {
+                            doctorInfoTV.setText("Error retrieving doctor information.");
+                            e.printStackTrace();
+                        });
                     } else {
-                        // No appointments found
-                        //empty.setText("No Upcoming Appointments");
+                        doctorInfoTV.setText("Doctor ID is missing in the appointment.");
                     }
-                });
+
+                    // Add the card to the appointments layout
+                    appointmentsLayout.addView(appointmentCard);
+
+                    // Set long click listener for canceling appointment
+                    appointmentCard.setOnLongClickListener(v -> {
+                        showCancelDialog(this, appointmentDate, appointmentTime);
+                        return true;
+                    });
+
+                    // Set click listener to view appointment details
+                    appointmentCard.setOnClickListener(view -> {
+                        Intent detailsIntent = new Intent(Homepage.this, AppointmentDetails.class);
+                        detailsIntent.putExtra("documentId", documentId);
+                        detailsIntent.putExtra("date", appointmentDate);
+                        detailsIntent.putExtra("time", appointmentTime);
+                        detailsIntent.putExtra("name", name);
+                        detailsIntent.putExtra("phone", phone);
+                        detailsIntent.putExtra("age", age);
+                        detailsIntent.putExtra("address", address);
+                        detailsIntent.putExtra("gender", gender);
+                        detailsIntent.putExtra("email", email);
+                        detailsIntent.putExtra("d_id", d_id);
+                        startActivity(detailsIntent);
+                    });
+                }
+            } else {
+                // No appointments found
+                //empty.setText("No Upcoming Appointments");
+            }
+        });
     }
 
     private void handleNavigationClicks() {
@@ -326,23 +313,17 @@ public class Homepage extends AppCompatActivity {
         dialog.setContentView(R.layout.cancel_appointment);
 
         Button btnCancel = dialog.findViewById(R.id.btnCancel);
-        btnCancel.setOnClickListener(v -> db.collection("appointments")
-                .whereEqualTo("date", date)
-                .whereEqualTo("time", time)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            document.getReference().delete()
-                                    .addOnSuccessListener(aVoid -> {
-                                        dialog.dismiss();
-                                        Toast.makeText(context, "Appointment Cancelled Successfully", Toast.LENGTH_SHORT).show();
-                                        recreate();
-                                    })
-                                    .addOnFailureListener(e -> dialog.dismiss());
-                        }
-                    }
-                }));
+        btnCancel.setOnClickListener(v -> db.collection("appointments").whereEqualTo("date", date).whereEqualTo("time", time).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    document.getReference().delete().addOnSuccessListener(aVoid -> {
+                        dialog.dismiss();
+                        Toast.makeText(context, "Appointment Cancelled Successfully", Toast.LENGTH_SHORT).show();
+                        recreate();
+                    }).addOnFailureListener(e -> dialog.dismiss());
+                }
+            }
+        }));
         dialog.show();
     }
 }
