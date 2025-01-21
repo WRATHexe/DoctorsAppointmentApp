@@ -48,12 +48,12 @@ public class LogInActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        String checkbox = preferences.getString("remember", "");
-        if (checkbox.equals("true")) {
+        Boolean checkbox = preferences.getBoolean("remember", false);
+        if (checkbox) {
             email.setText(preferences.getString("email", ""));
             password.setText(preferences.getString("password", ""));
             rememberMe.setChecked(true);
-        } else if (checkbox.equals("false")) {
+        } else  {
             Toast.makeText(this, "Please Sign In", Toast.LENGTH_SHORT).show();
         }
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -85,6 +85,7 @@ public class LogInActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("email", email.getText().toString());
                     editor.putString("password", password.getText().toString());
+                    editor.putBoolean("remember", true);
                     editor.apply();
                 }
             }
