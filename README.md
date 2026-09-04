@@ -1,4 +1,3 @@
-This PR replaces the placeholder README with a complete project guide so contributors can understand, configure, and run the app without inspecting source files. It documents the app’s scope, Firebase dependency, and developer entry points.
 
 - **Overview and scope**
   - Added a clear project summary for the Doctors Appointment App and its patient/doctor workflows.
